@@ -14,7 +14,7 @@
 <meta property="og:description" content="引言hyper是一个基于tokio的异步网络库，它提供了http1和http2的实现。它的性能非常好，因此在Rust社区中非常受欢迎。在阅读hyper的源码时，我发现一些值得记录的地方，因此决定写一篇文章来记录一下。本文主要分析hyper中http1客户端发送请求时的序列化过程。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-02-11T12:39:55.000Z">
-<meta property="article:modified_time" content="2024-02-11T12:51:49.034Z">
+<meta property="article:modified_time" content="2024-02-11T12:57:18.552Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Rust">
 <meta property="article:tag" content="network">
@@ -101,12 +101,12 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>hyper是一个基于tokio的异步网络库，它提供了http1和http2的实现。它的性能非常好，因此在Rust社区中非常受欢迎。在阅读hyper的源码时，我发现一些值得记录的地方，因此决定写一篇文章来记录一下。本文主要分析hyper中http1客户端发送请求时的序列化过程。</p>
-
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>hyper是一个基于tokio的异步网络库，它提供了http1和http2的实现。它的性能非常好，因此在Rust社区中非常受欢迎。在阅读hyper的源码时，我发现一些值得记录的地方，因此决定写一篇文章来记录一下。本文主要分析hyper中http1客户端发送请求时的序列化过程。</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/11/hyper-http1/" data-id="clshibi8f00013vgt8ge96c05" data-title="hyper http1 客户端发送请求时的序列化过程分析" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2024/02/11/hyper-http1/" data-id="clshifuou0000dagtajusf916" data-title="hyper http1 客户端发送请求时的序列化过程分析" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -116,16 +116,6 @@
   </div>
   
     
-<nav id="article-nav">
-  
-  
-    <a href="/2024/02/11/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">后一篇</strong>
-      <div class="article-nav-title">Hello World</div>
-    </a>
-  
-</nav>
-
   
 </article>
 
@@ -181,10 +171,6 @@
         
           <li>
             <a href="/2024/02/11/hyper-http1/">hyper http1 客户端发送请求时的序列化过程分析</a>
-          </li>
-        
-          <li>
-            <a href="/2024/02/11/hello-world/">Hello World</a>
           </li>
         
       </ul>
