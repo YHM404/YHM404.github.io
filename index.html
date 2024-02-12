@@ -95,12 +95,44 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>hyper是一个基于tokio的异步网络库，它提供了http1和http2的实现。它的性能非常好，因此在Rust社区中非常受欢迎。在阅读hyper的源码时，我发现一些值得记录的地方，因此决定写一篇文章来记录一下。本文主要分析hyper中http1客户端发送请求时的序列化过程。</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2>
+        <h2 id="1-引言"><a href="#1-引言" class="headerlink" title="1.引言"></a>1.引言</h2><p>hyper是一个基于tokio的异步网络库，它提供了http1和http2的实现。它的性能非常好，因此在Rust社区中非常受欢迎。在阅读hyper的源码时，我发现一些值得记录的地方，因此决定写一篇文章来记录一下。本文主要分析hyper中http1客户端发送请求时的序列化过程。</p>
+<h2 id="2-客户端通信分析"><a href="#2-客户端通信分析" class="headerlink" title="2.客户端通信分析"></a>2.客户端通信分析</h2><ol>
+<li><p><strong>handshake</strong></p>
+<p> 入口在src&#x2F;client&#x2F;conn&#x2F;http.rs:Builder::handshake</p>
+<p> 首先将传递进来的io连接包装成<code>proto::Conn</code>, 包装好的<code>Conn</code>封装了读写时的策略等元信息。然后handshak返回两个返回值<code>SendRequest</code>和<code>Connection</code>。<code>SendRequest</code>用于client发送http Request。<code>Connection</code>用于启动一个Service来批量发送Request和接收Response。</p>
+</li>
+<li><p><strong>Send Request</strong></p>
+<p> <code>SendRequest</code>的send_request方法用来发送HttpRequest，其内部通过一个channel把HttpRequest以及一个channel的sender（作为Callback）发送到另外一端，然后把该channel的receiver封装成一个Future作为返回值返回，该Future在Ready时会收到通过channel发过来的Response。</p>
+</li>
+<li><p><strong>Connection</strong></p>
+<p> Connection也是一个Future，当运行时对其进行调度执行时，实际上是主要做了两件事。</p>
+<ol>
+<li><p>循环尝试写数据</p>
+<p> 相关函数入口：</p>
+ <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">src/proto/h1/dispatcher:Dispatcher::poll_write </span><br><span class="line"></span><br><span class="line">src/proto/h1/dispatcher:Client::poll_msg</span><br></pre></td></tr></table></figure>
+
+<p> 尝试从上文中提到的发送Request的channel中拿到对应的<code>Request</code>和<code>Callback</code>，并把<code>Request</code>写入到<code>BufferWriter</code>中，然后把<code>Callback</code>塞到<code>Client</code>结构体里，用于后续读数据时<code>Client</code>把数据通过<code>Callback</code>传回去。如果<code>BufferWriter</code>满了就使用尝试Flush。Request写完后也会尝试Flush。</p>
+</li>
+<li><p>循环尝试读数据</p>
+<p> 相关函数入口：</p>
+ <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">src/proto/h1/dispatcher:Dispatcher::poll_read</span><br><span class="line"></span><br><span class="line">src/proto/h1/dispatcher:Client::recv_msg</span><br></pre></td></tr></table></figure>
+
+<p> 大致可以理解为，尝试从底层io连接持续读数据并解析的Response，<code>Client</code>通过Callback,把解析出来的Response通过Sender发回去（实际是把Header和Incoming（Receive）发回去，然后接收端慢慢接收Body）。</p>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="3-发送数据时的BufferWriter分析"><a href="#3-发送数据时的BufferWriter分析" class="headerlink" title="3. 发送数据时的BufferWriter分析"></a>3. 发送数据时的BufferWriter分析</h2><p>发送数据时使用的<code>BufferWriter</code>是我觉得比较有意思的一个地方，里面的<code>Buffer</code>用到的数据结构是一个叫<code>BufList</code>的数据结构, 该结构定义在src&#x2F;common&#x2F;buf.rs</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">pub</span>(<span class="keyword">crate</span>) <span class="keyword">struct</span> <span class="title class_">BufList</span>&lt;T&gt; &#123;</span><br><span class="line">    bufs: VecDeque&lt;T&gt;,</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>其内部是一个队列，T暂时可以认为是Bytes，其内部并不是一个连续的Buffer，而是使用了这种非连续的内存结构，这样做再结合Writev，可以避免把多块内存拷贝到一块连续内存的开销。</p>
+<p>每次在序列化请求时会把请求的Header和Body分别写入到BufferWriter的不同位置中，header会被序列化后放到一个Vec<u8>中，然后body会被放到BufList中，然后在发送时会把这两个部分的数据通过Writev一起发送出去。header不使用BufList的原因是header序列化产生的数据是连续的，而body可能是非连续的，因此使用BufList来存储。</p>
+<h2 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h2><p>hyper使用了一些非常有意思的数据结构和技巧。本文主要分析了hyper中http1客户端发送请求时的序列化过程，以及BufferWriter的实现。希望本文能够帮助大家更好的理解hyper的实现。</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/11/hyper-http1/" data-id="clshifuou0000dagtajusf916" data-title="hyper http1 客户端发送请求时的序列化过程分析" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2024/02/11/hyper-http1/" data-id="clsizj31t0000zbgtcth19okg" data-title="hyper http1 客户端发送请求时的序列化过程分析" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
