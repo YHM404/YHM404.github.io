@@ -69,6 +69,45 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-hyper-http2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/02/25/hyper-http2/" class="article-date">
+  <time class="dt-published" datetime="2024-02-24T17:08:36.000Z" itemprop="datePublished">2024-02-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/02/25/hyper-http2/">hyper http2 客户端建立双向流的过程分析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-引言"><a href="#1-引言" class="headerlink" title="1.引言"></a>1.引言</h2><p>之前在使用tonic-rs(基于hyper实现的grpc库)时抓包发现在建立stream并向server发送数据时，需要先发送一个HeaderFrame并收到Server的HeaderFrame后才能发送数据。当时觉得非常不解的一点就是，为什么会先发送完一个HeaderFrame，并收到Server的HeaderFrame后才会发送数据。因此决定深入了解一下hyper中http2客户端建立双向流的过程。</p>
+<h2 id="2-hyper-http2客户端通信分析"><a href="#2-hyper-http2客户端通信分析" class="headerlink" title="2.hyper http2客户端通信分析"></a>2.hyper http2客户端通信分析</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/02/25/hyper-http2/" data-id="clt0civr10001rh9jayu8cmp0" data-title="hyper http2 客户端建立双向流的过程分析" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-hyper-http1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/02/11/hyper-http1/" class="article-date">
@@ -132,7 +171,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/11/hyper-http1/" data-id="clsj0snfz0000itgt699n8l22" data-title="hyper http1 客户端发送请求时的序列化过程分析" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2024/02/11/hyper-http1/" data-id="clt0civqz0000rh9jfxfmhbzk" data-title="hyper http1 客户端发送请求时的序列化过程分析" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -196,6 +235,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2024/02/25/hyper-http2/">hyper http2 客户端建立双向流的过程分析</a>
+          </li>
         
           <li>
             <a href="/2024/02/11/hyper-http1/">hyper http1 客户端发送请求时的序列化过程分析</a>
