@@ -4,9 +4,9 @@
 # baseURL = "https://your_domain.com/"
 
 # Site's language code
-languageCode = 'en-us'
+languageCode = 'zh-cn'
 
-# title = "Site Title"
+title = "力工一号的饭盆"
 
 theme = "kayal" # UNCOMMENT THIS LINE
 
@@ -39,10 +39,10 @@ changefreq = 'daily'
 filename = 'sitemap.xml'
 priority = 0.5
 
-# Google Analytics Configuration
-# [services]
-#   [services.googleAnalytics]
-#     ID = 'G-MEASUREMENT_ID'
+#Google Analytics Configuration
+[services]
+[services.googleAnalytics]
+ID = 'G-MEASUREMENT_ID'
 
 [caches]
 [caches.images]
