@@ -1,0 +1,7 @@
+baseURL = 'https://example.org/'
+languageCode = 'zh-cn'
+title = '力工一号的饭盆'
+
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
