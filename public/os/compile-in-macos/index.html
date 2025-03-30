@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en-us" dir="ltr">
+<html lang="zh-cn" dir="ltr">
   <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8">
-  <meta http-equiv="content-language" content="en-us" />
+  <meta http-equiv="content-language" content="zh-cn" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
   
   
-  <title>在 Macos 上编译 linux 内核 &middot; </title>
-  <meta name="title" content="在 Macos 上编译 linux 内核 &middot; " />
+  <title>在 Macos 上编译 linux 内核 &middot; 力工一号的饭盆</title>
+  <meta name="title" content="在 Macos 上编译 linux 内核 &middot; 力工一号的饭盆" />
   
 
   
@@ -44,9 +44,11 @@
   
 
   <meta property="og:url" content="//localhost:1313/os/compile-in-macos/">
+  <meta property="og:site_name" content="力工一号的饭盆">
   <meta property="og:title" content="在 Macos 上编译 linux 内核">
-  <meta property="og:description" content="1. 克隆内核源码 使用以下命令克隆特定版本的内核源码：">
-  <meta property="og:locale" content="en_us">
+  <meta property="og:description" content="之前在 macOS 上尝试编译 Linux 内核时，踩了不少坑。网上的教程大多不够详细，这里我参考了一篇文章 并用GPT4.5整理了一下自己需要的部分，供自己和大家参考。
+准备工作 1. 克隆 Linux 内核源码 首先，我们需要特定版本的 Linux 内核源码（这里用的是 v6.5.7）：">
+  <meta property="og:locale" content="zh_cn">
   <meta property="og:type" content="article">
     <meta property="article:section" content="os">
     <meta property="article:published_time" content="2025-03-30T21:59:50+08:00">
@@ -56,7 +58,8 @@
   
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="在 Macos 上编译 linux 内核">
-  <meta name="twitter:description" content="1. 克隆内核源码 使用以下命令克隆特定版本的内核源码：">
+  <meta name="twitter:description" content="之前在 macOS 上尝试编译 Linux 内核时，踩了不少坑。网上的教程大多不够详细，这里我参考了一篇文章 并用GPT4.5整理了一下自己需要的部分，供自己和大家参考。
+准备工作 1. 克隆 Linux 内核源码 首先，我们需要特定版本的 Linux 内核源码（这里用的是 v6.5.7）：">
 
   
 
@@ -123,7 +126,7 @@
     
     <div class="header-cntr">
     <a class="title" href="/">
-    <span></span>
+    <span>力工一号的饭盆</span>
     </a>
   <div class="menu">
   <nav id="main-menu" class="mm-normal">
@@ -302,15 +305,9 @@
 
 </span>
   
-    1 min
+    2 mins
   
 
-
-  <span class="draft-lbl"><span class="meta-icon">
-
-    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"/></svg>
-
-</span>DRAFT</span>
 
 </p>
 
@@ -330,14 +327,23 @@
       <div class="toc-innr">
         <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#准备工作">准备工作</a>
       <ul>
-        <li><a href="#1-克隆内核源码">1. 克隆内核源码</a></li>
-        <li><a href="#2-安装必要工具">2. 安装必要工具</a></li>
-        <li><a href="#3-应用补丁">3. 应用补丁</a></li>
-        <li><a href="#4-编译内核">4. 编译内核</a></li>
+        <li><a href="#1-克隆-linux-内核源码">1. 克隆 Linux 内核源码</a></li>
+        <li><a href="#2-安装编译所需工具">2. 安装编译所需工具</a></li>
+        <li><a href="#3-应用-macos-专用补丁">3. 应用 macOS 专用补丁</a></li>
+        <li><a href="#4-编译-linux-内核">4. 编译 Linux 内核</a></li>
       </ul>
     </li>
+    <li><a href="#准备驱动文件和运行虚拟机">准备驱动文件和运行虚拟机</a>
+      <ul>
+        <li><a href="#1-下载并准备驱动文件linux-文件系统镜像">1. 下载并准备驱动文件（Linux 文件系统镜像）</a></li>
+        <li><a href="#2-安装-qemu-虚拟机工具">2. 安装 QEMU 虚拟机工具</a></li>
+        <li><a href="#3-用-qemu-启动虚拟机并加载自定义内核">3. 用 QEMU 启动虚拟机并加载自定义内核</a></li>
+        <li><a href="#4-检查虚拟机内核版本">4. 检查虚拟机内核版本</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结">总结</a></li>
   </ul>
 </nav>
       </div>
@@ -347,11 +353,26 @@
 
 
 
+<p>之前在 macOS 上尝试编译 Linux 内核时，踩了不少坑。网上的教程大多不够详细，这里我参考了一篇<a href="https://mastermakrela.com/kernel/lkp/kernel-dev-on-macos" target="_blank">文章</a>
+并用<strong>GPT4.5</strong>整理了一下自己需要的部分，供自己和大家参考。</p>
+<hr>
 
-<h3 id="1-克隆内核源码">
-  1. 克隆内核源码
+<h2 id="准备工作">
+  准备工作
   
-  <a hidden class="anchor" href="#1-%e5%85%8b%e9%9a%86%e5%86%85%e6%a0%b8%e6%ba%90%e7%a0%81">
+  <a hidden class="anchor" href="#%e5%87%86%e5%a4%87%e5%b7%a5%e4%bd%9c">
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M172.5 131.1C228.1 75.51 320.5 75.51 376.1 131.1C426.1 181.1 433.5 260.8 392.4 318.3L391.3 319.9C381 334.2 361 337.6 346.7 327.3C332.3 317 328.9 297 339.2 282.7L340.3 281.1C363.2 249 359.6 205.1 331.7 177.2C300.3 145.8 249.2 145.8 217.7 177.2L105.5 289.5C73.99 320.1 73.99 372 105.5 403.5C133.3 431.4 177.3 435 209.3 412.1L210.9 410.1C225.3 400.7 245.3 404 255.5 418.4C265.8 432.8 262.5 452.8 248.1 463.1L246.5 464.2C188.1 505.3 110.2 498.7 60.21 448.8C3.741 392.3 3.741 300.7 60.21 244.3L172.5 131.1zM467.5 380C411 436.5 319.5 436.5 263 380C213 330 206.5 251.2 247.6 193.7L248.7 192.1C258.1 177.8 278.1 174.4 293.3 184.7C307.7 194.1 311.1 214.1 300.8 229.3L299.7 230.9C276.8 262.1 280.4 306.9 308.3 334.8C339.7 366.2 390.8 366.2 422.3 334.8L534.5 222.5C566 191 566 139.1 534.5 108.5C506.7 80.63 462.7 76.99 430.7 99.9L429.1 101C414.7 111.3 394.7 107.1 384.5 93.58C374.2 79.2 377.5 59.21 391.9 48.94L393.5 47.82C451 6.731 529.8 13.25 579.8 63.24C636.3 119.7 636.3 211.3 579.8 267.7L467.5 380z"/></svg>
+
+
+ </a>
+  
+</h2>
+
+<h3 id="1-克隆-linux-内核源码">
+  1. 克隆 Linux 内核源码
+  
+  <a hidden class="anchor" href="#1-%e5%85%8b%e9%9a%86-linux-%e5%86%85%e6%a0%b8%e6%ba%90%e7%a0%81">
 
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M172.5 131.1C228.1 75.51 320.5 75.51 376.1 131.1C426.1 181.1 433.5 260.8 392.4 318.3L391.3 319.9C381 334.2 361 337.6 346.7 327.3C332.3 317 328.9 297 339.2 282.7L340.3 281.1C363.2 249 359.6 205.1 331.7 177.2C300.3 145.8 249.2 145.8 217.7 177.2L105.5 289.5C73.99 320.1 73.99 372 105.5 403.5C133.3 431.4 177.3 435 209.3 412.1L210.9 410.1C225.3 400.7 245.3 404 255.5 418.4C265.8 432.8 262.5 452.8 248.1 463.1L246.5 464.2C188.1 505.3 110.2 498.7 60.21 448.8C3.741 392.3 3.741 300.7 60.21 244.3L172.5 131.1zM467.5 380C411 436.5 319.5 436.5 263 380C213 330 206.5 251.2 247.6 193.7L248.7 192.1C258.1 177.8 278.1 174.4 293.3 184.7C307.7 194.1 311.1 214.1 300.8 229.3L299.7 230.9C276.8 262.1 280.4 306.9 308.3 334.8C339.7 366.2 390.8 366.2 422.3 334.8L534.5 222.5C566 191 566 139.1 534.5 108.5C506.7 80.63 462.7 76.99 430.7 99.9L429.1 101C414.7 111.3 394.7 107.1 384.5 93.58C374.2 79.2 377.5 59.21 391.9 48.94L393.5 47.82C451 6.731 529.8 13.25 579.8 63.24C636.3 119.7 636.3 211.3 579.8 267.7L467.5 380z"/></svg>
 
@@ -359,17 +380,18 @@
  </a>
   
 </h3>
-<p>使用以下命令克隆特定版本的内核源码：</p>
+<p>首先，我们需要特定版本的 Linux 内核源码（这里用的是 v6.5.7）：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --depth <span style="color:#ae81ff">1</span> -b v6.5.7
 </span></span></code></pre></div><blockquote>
-<p><strong>注意</strong>：必须使用 <code>v6.5.7</code> 版本，否则补丁可能无法应用。<br>
-此版本可以忽略 APFS 文件系统不区分大小写的问题，但 <code>make clean</code> 可能无法正常工作。</p></blockquote>
+<p>⚠️ <strong>注意</strong>：<br>
+一定要用 v6.5.7 版本，因为后续的补丁是专门针对这个版本的。如果用其他版本，可能会导致补丁失败。</p></blockquote>
+<p>另外，macOS 的文件系统 (APFS) 默认不区分大小写，可能导致一些奇怪的问题。不过在 v6.5.7 版本，这个问题不会影响编译过程，只是 <code>make clean</code> 可能会报错，暂时可以忽略。</p>
 <hr>
 
-<h3 id="2-安装必要工具">
-  2. 安装必要工具
+<h3 id="2-安装编译所需工具">
+  2. 安装编译所需工具
   
-  <a hidden class="anchor" href="#2-%e5%ae%89%e8%a3%85%e5%bf%85%e8%a6%81%e5%b7%a5%e5%85%b7">
+  <a hidden class="anchor" href="#2-%e5%ae%89%e8%a3%85%e7%bc%96%e8%af%91%e6%89%80%e9%9c%80%e5%b7%a5%e5%85%b7">
 
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M172.5 131.1C228.1 75.51 320.5 75.51 376.1 131.1C426.1 181.1 433.5 260.8 392.4 318.3L391.3 319.9C381 334.2 361 337.6 346.7 327.3C332.3 317 328.9 297 339.2 282.7L340.3 281.1C363.2 249 359.6 205.1 331.7 177.2C300.3 145.8 249.2 145.8 217.7 177.2L105.5 289.5C73.99 320.1 73.99 372 105.5 403.5C133.3 431.4 177.3 435 209.3 412.1L210.9 410.1C225.3 400.7 245.3 404 255.5 418.4C265.8 432.8 262.5 452.8 248.1 463.1L246.5 464.2C188.1 505.3 110.2 498.7 60.21 448.8C3.741 392.3 3.741 300.7 60.21 244.3L172.5 131.1zM467.5 380C411 436.5 319.5 436.5 263 380C213 330 206.5 251.2 247.6 193.7L248.7 192.1C258.1 177.8 278.1 174.4 293.3 184.7C307.7 194.1 311.1 214.1 300.8 229.3L299.7 230.9C276.8 262.1 280.4 306.9 308.3 334.8C339.7 366.2 390.8 366.2 422.3 334.8L534.5 222.5C566 191 566 139.1 534.5 108.5C506.7 80.63 462.7 76.99 430.7 99.9L429.1 101C414.7 111.3 394.7 107.1 384.5 93.58C374.2 79.2 377.5 59.21 391.9 48.94L393.5 47.82C451 6.731 529.8 13.25 579.8 63.24C636.3 119.7 636.3 211.3 579.8 267.7L467.5 380z"/></svg>
 
@@ -377,16 +399,15 @@
  </a>
   
 </h3>
-<p>通过 Homebrew 安装以下工具：</p>
+<p>我们需要用 Homebrew 安装一些必要工具：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>brew install clang-format llvm make openssl
-</span></span></code></pre></div><blockquote>
-<p>如果编译过程中提示缺少其他工具，可以根据提示安装。</p></blockquote>
+</span></span></code></pre></div><p>如果后面编译时提示缺少其他工具，再根据提示补装就好。</p>
 <hr>
 
-<h3 id="3-应用补丁">
-  3. 应用补丁
+<h3 id="3-应用-macos-专用补丁">
+  3. 应用 macOS 专用补丁
   
-  <a hidden class="anchor" href="#3-%e5%ba%94%e7%94%a8%e8%a1%a5%e4%b8%81">
+  <a hidden class="anchor" href="#3-%e5%ba%94%e7%94%a8-macos-%e4%b8%93%e7%94%a8%e8%a1%a5%e4%b8%81">
 
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M172.5 131.1C228.1 75.51 320.5 75.51 376.1 131.1C426.1 181.1 433.5 260.8 392.4 318.3L391.3 319.9C381 334.2 361 337.6 346.7 327.3C332.3 317 328.9 297 339.2 282.7L340.3 281.1C363.2 249 359.6 205.1 331.7 177.2C300.3 145.8 249.2 145.8 217.7 177.2L105.5 289.5C73.99 320.1 73.99 372 105.5 403.5C133.3 431.4 177.3 435 209.3 412.1L210.9 410.1C225.3 400.7 245.3 404 255.5 418.4C265.8 432.8 262.5 452.8 248.1 463.1L246.5 464.2C188.1 505.3 110.2 498.7 60.21 448.8C3.741 392.3 3.741 300.7 60.21 244.3L172.5 131.1zM467.5 380C411 436.5 319.5 436.5 263 380C213 330 206.5 251.2 247.6 193.7L248.7 192.1C258.1 177.8 278.1 174.4 293.3 184.7C307.7 194.1 311.1 214.1 300.8 229.3L299.7 230.9C276.8 262.1 280.4 306.9 308.3 334.8C339.7 366.2 390.8 366.2 422.3 334.8L534.5 222.5C566 191 566 139.1 534.5 108.5C506.7 80.63 462.7 76.99 430.7 99.9L429.1 101C414.7 111.3 394.7 107.1 384.5 93.58C374.2 79.2 377.5 59.21 391.9 48.94L393.5 47.82C451 6.731 529.8 13.25 579.8 63.24C636.3 119.7 636.3 211.3 579.8 267.7L467.5 380z"/></svg>
 
@@ -394,33 +415,32 @@
  </a>
   
 </h3>
-<p>由于 macOS 缺少一些必要文件（如 <code>elf.h</code> 和 <code>endian.h</code>），需要应用补丁以解决这些问题。</p>
-<p>执行以下命令：</p>
+<p>Linux 内核源码默认是为 Linux 环境准备的，直接在 macOS 上编译会缺少一些头文件（比如 <code>elf.h</code> 和 <code>endian.h</code>），还会有其他兼容性问题。因此我们需要打一个专门为 macOS 准备的补丁：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd linux
-</span></span><span style="display:flex;"><span>curl -O https://github.com/mastermakrela/kernel-dev/blob/main/mac_patch_6-5-7.patch
+</span></span><span style="display:flex;"><span>curl -O https://github.com/mastermakrela/kernel-dev/raw/main/mac_patch_6-5-7.patch
 </span></span><span style="display:flex;"><span>patch &lt; mac_patch_6-5-7.patch
-</span></span></code></pre></div><p>应用补丁后，可通过以下命令检查：</p>
+</span></span></code></pre></div><p>补丁打好后，用下面命令确认一下：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git status
-</span></span></code></pre></div><p>示例输出：</p>
-<pre tabindex="0"><code>❯ git status
-Not currently on any branch.
-Changes to be committed:
-  (use &#34;git restore --staged &lt;file&gt;...&#34; to unstage)
-	modified:   Makefile
-	modified:   arch/arm64/kernel/vdso32/Makefile
-	new file:   arch/arm64/kernel/vdso32/elf_helper.h
-	modified:   arch/arm64/kvm/hyp/nvhe/Makefile
-	new file:   arch/arm64/kvm/hyp/nvhe/endian_helper.h
-	new file:   elf.h
-	new file:   endian.h
-	modified:   scripts/mod/file2alias.c
-	modified:   scripts/subarch.include
-</code></pre><hr>
+</span></span></code></pre></div><p>正常情况下，你会看到类似这样的输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>❯ git status
+</span></span><span style="display:flex;"><span>Not currently on any branch.
+</span></span><span style="display:flex;"><span>Changes to be committed:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">(</span>use <span style="color:#e6db74">&#34;git restore --staged &lt;file&gt;...&#34;</span> to unstage<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span> modified:   Makefile
+</span></span><span style="display:flex;"><span> modified:   arch/arm64/kernel/vdso32/Makefile
+</span></span><span style="display:flex;"><span> new file:   arch/arm64/kernel/vdso32/elf_helper.h
+</span></span><span style="display:flex;"><span> modified:   arch/arm64/kvm/hyp/nvhe/Makefile
+</span></span><span style="display:flex;"><span> new file:   arch/arm64/kvm/hyp/nvhe/endian_helper.h
+</span></span><span style="display:flex;"><span> new file:   elf.h
+</span></span><span style="display:flex;"><span> new file:   endian.h
+</span></span><span style="display:flex;"><span> modified:   scripts/mod/file2alias.c
+</span></span><span style="display:flex;"><span> modified:   scripts/subarch.include
+</span></span></code></pre></div><hr>
 
-<h3 id="4-编译内核">
-  4. 编译内核
+<h3 id="4-编译-linux-内核">
+  4. 编译 Linux 内核
   
-  <a hidden class="anchor" href="#4-%e7%bc%96%e8%af%91%e5%86%85%e6%a0%b8">
+  <a hidden class="anchor" href="#4-%e7%bc%96%e8%af%91-linux-%e5%86%85%e6%a0%b8">
 
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M172.5 131.1C228.1 75.51 320.5 75.51 376.1 131.1C426.1 181.1 433.5 260.8 392.4 318.3L391.3 319.9C381 334.2 361 337.6 346.7 327.3C332.3 317 328.9 297 339.2 282.7L340.3 281.1C363.2 249 359.6 205.1 331.7 177.2C300.3 145.8 249.2 145.8 217.7 177.2L105.5 289.5C73.99 320.1 73.99 372 105.5 403.5C133.3 431.4 177.3 435 209.3 412.1L210.9 410.1C225.3 400.7 245.3 404 255.5 418.4C265.8 432.8 262.5 452.8 248.1 463.1L246.5 464.2C188.1 505.3 110.2 498.7 60.21 448.8C3.741 392.3 3.741 300.7 60.21 244.3L172.5 131.1zM467.5 380C411 436.5 319.5 436.5 263 380C213 330 206.5 251.2 247.6 193.7L248.7 192.1C258.1 177.8 278.1 174.4 293.3 184.7C307.7 194.1 311.1 214.1 300.8 229.3L299.7 230.9C276.8 262.1 280.4 306.9 308.3 334.8C339.7 366.2 390.8 366.2 422.3 334.8L534.5 222.5C566 191 566 139.1 534.5 108.5C506.7 80.63 462.7 76.99 430.7 99.9L429.1 101C414.7 111.3 394.7 107.1 384.5 93.58C374.2 79.2 377.5 59.21 391.9 48.94L393.5 47.82C451 6.731 529.8 13.25 579.8 63.24C636.3 119.7 636.3 211.3 579.8 267.7L467.5 380z"/></svg>
 
@@ -428,27 +448,153 @@ Changes to be committed:
  </a>
   
 </h3>
-<p>执行以下命令编译内核：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>brew --prefix llvm<span style="color:#66d9ef">)</span><span style="color:#e6db74">/bin/:</span>$PATH<span style="color:#e6db74">&#34;</span> make LLVM<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> defconfig
-</span></span><span style="display:flex;"><span>make LLVM<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> menuconfig  <span style="color:#75715e"># 可选：在 General setup 中设置内核版本</span>
-</span></span><span style="display:flex;"><span>time make LLVM<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> ARCH<span style="color:#f92672">=</span>arm64 -j <span style="color:#66d9ef">$(</span>sysctl -n hw.logicalcpu<span style="color:#66d9ef">)</span> HOSTCFLAGS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-I./&#34;</span>
-</span></span></code></pre></div>
-<h4 id="参数说明">
-  参数说明：
+<p>接下来就可以编译内核了。我们需要明确告诉编译工具使用 Homebrew 安装的 LLVM 工具链（而不是 macOS 自带的），然后生成默认配置：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>brew --prefix llvm<span style="color:#66d9ef">)</span><span style="color:#e6db74">/bin/:</span>$PATH<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>make LLVM<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> defconfig
+</span></span></code></pre></div><p>如果你希望给编译的内核加一个自定义版本后缀（方便以后识别），可以运行：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>make LLVM<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> menuconfig
+</span></span></code></pre></div><p>在菜单里选择：</p>
+<ul>
+<li>General setup → Local version - append to kernel release<br>
+输入你希望的版本后缀，比如 <code>-mykernel</code>。</li>
+</ul>
+<p>然后正式开始编译：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>time make LLVM<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> ARCH<span style="color:#f92672">=</span>arm64 -j <span style="color:#66d9ef">$(</span>sysctl -n hw.logicalcpu<span style="color:#66d9ef">)</span> HOSTCFLAGS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-I./&#34;</span>
+</span></span></code></pre></div><p>参数含义：</p>
+<ul>
+<li><code>LLVM=1</code>：使用 LLVM 工具链（clang）而非传统的 gcc。</li>
+<li><code>ARCH=arm64</code>：为 arm64 架构编译。</li>
+<li><code>-j $(sysctl -n hw.logicalcpu)</code>：使用所有 CPU 核心并行编译，加快速度。</li>
+<li><code>HOSTCFLAGS=&quot;-I./&quot;</code>：将当前目录添加到 include 路径。</li>
+</ul>
+
+<h2 id="准备驱动文件和运行虚拟机">
+  准备驱动文件和运行虚拟机
   
-  <a hidden class="anchor" href="#%e5%8f%82%e6%95%b0%e8%af%b4%e6%98%8e">
+  <a hidden class="anchor" href="#%e5%87%86%e5%a4%87%e9%a9%b1%e5%8a%a8%e6%96%87%e4%bb%b6%e5%92%8c%e8%bf%90%e8%a1%8c%e8%99%9a%e6%8b%9f%e6%9c%ba">
 
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M172.5 131.1C228.1 75.51 320.5 75.51 376.1 131.1C426.1 181.1 433.5 260.8 392.4 318.3L391.3 319.9C381 334.2 361 337.6 346.7 327.3C332.3 317 328.9 297 339.2 282.7L340.3 281.1C363.2 249 359.6 205.1 331.7 177.2C300.3 145.8 249.2 145.8 217.7 177.2L105.5 289.5C73.99 320.1 73.99 372 105.5 403.5C133.3 431.4 177.3 435 209.3 412.1L210.9 410.1C225.3 400.7 245.3 404 255.5 418.4C265.8 432.8 262.5 452.8 248.1 463.1L246.5 464.2C188.1 505.3 110.2 498.7 60.21 448.8C3.741 392.3 3.741 300.7 60.21 244.3L172.5 131.1zM467.5 380C411 436.5 319.5 436.5 263 380C213 330 206.5 251.2 247.6 193.7L248.7 192.1C258.1 177.8 278.1 174.4 293.3 184.7C307.7 194.1 311.1 214.1 300.8 229.3L299.7 230.9C276.8 262.1 280.4 306.9 308.3 334.8C339.7 366.2 390.8 366.2 422.3 334.8L534.5 222.5C566 191 566 139.1 534.5 108.5C506.7 80.63 462.7 76.99 430.7 99.9L429.1 101C414.7 111.3 394.7 107.1 384.5 93.58C374.2 79.2 377.5 59.21 391.9 48.94L393.5 47.82C451 6.731 529.8 13.25 579.8 63.24C636.3 119.7 636.3 211.3 579.8 267.7L467.5 380z"/></svg>
 
 
  </a>
   
-</h4>
+</h2>
+<p>我们刚刚在 macOS 上成功编译了 Linux 内核，但光有内核是不够的，还需要完整的 Linux 文件系统（驱动文件）才能启动运行。这里介绍一下如何获取驱动文件，并用 QEMU 虚拟机运行我们刚编译的内核。</p>
+<hr>
+
+<h3 id="1-下载并准备驱动文件linux-文件系统镜像">
+  1. 下载并准备驱动文件（Linux 文件系统镜像）
+  
+  <a hidden class="anchor" href="#1-%e4%b8%8b%e8%bd%bd%e5%b9%b6%e5%87%86%e5%a4%87%e9%a9%b1%e5%8a%a8%e6%96%87%e4%bb%b6linux-%e6%96%87%e4%bb%b6%e7%b3%bb%e7%bb%9f%e9%95%9c%e5%83%8f">
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M172.5 131.1C228.1 75.51 320.5 75.51 376.1 131.1C426.1 181.1 433.5 260.8 392.4 318.3L391.3 319.9C381 334.2 361 337.6 346.7 327.3C332.3 317 328.9 297 339.2 282.7L340.3 281.1C363.2 249 359.6 205.1 331.7 177.2C300.3 145.8 249.2 145.8 217.7 177.2L105.5 289.5C73.99 320.1 73.99 372 105.5 403.5C133.3 431.4 177.3 435 209.3 412.1L210.9 410.1C225.3 400.7 245.3 404 255.5 418.4C265.8 432.8 262.5 452.8 248.1 463.1L246.5 464.2C188.1 505.3 110.2 498.7 60.21 448.8C3.741 392.3 3.741 300.7 60.21 244.3L172.5 131.1zM467.5 380C411 436.5 319.5 436.5 263 380C213 330 206.5 251.2 247.6 193.7L248.7 192.1C258.1 177.8 278.1 174.4 293.3 184.7C307.7 194.1 311.1 214.1 300.8 229.3L299.7 230.9C276.8 262.1 280.4 306.9 308.3 334.8C339.7 366.2 390.8 366.2 422.3 334.8L534.5 222.5C566 191 566 139.1 534.5 108.5C506.7 80.63 462.7 76.99 430.7 99.9L429.1 101C414.7 111.3 394.7 107.1 384.5 93.58C374.2 79.2 377.5 59.21 391.9 48.94L393.5 47.82C451 6.731 529.8 13.25 579.8 63.24C636.3 119.7 636.3 211.3 579.8 267.7L467.5 380z"/></svg>
+
+
+ </a>
+  
+</h3>
+<p>最简单的方法就是用现成的 Linux 系统镜像，这里推荐 Arch Linux ARM 镜像：</p>
 <ul>
-<li><code>PATH=&quot;$(brew --prefix llvm)/bin/:$PATH&quot;</code>：确保使用 Homebrew 安装的 <code>clang</code>，避免使用 Xcode 自带版本。</li>
-<li><code>LLVM=1</code>：使用 <code>clang</code> 而非 <code>gcc</code>。</li>
-<li><code>ARCH=arm64</code>：为 arm64 架</li>
+<li>前往 <a href="https://mac.getutm.app/gallery/archlinux-arm" target="_blank">UTM 官方镜像库</a>
+ 下载 Arch Linux ARM 镜像（<code>.utm</code> 文件）。</li>
 </ul>
+<p>下载好后，先用 UTM 打开这个镜像，进行一些简单的初始化设置：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pacman -Syu lsof neofetch strace
+</span></span></code></pre></div><p>做完这些设置后，关闭虚拟机。</p>
+<p>接下来，我们需要从 <code>.utm</code> 文件中提取磁盘镜像文件：</p>
+<ul>
+<li>在 Finder 中找到你刚刚下载的 <code>.utm</code> 文件。</li>
+<li>右键点击，选择「显示包内容」。</li>
+<li>进入 <code>Data</code> 文件夹，找到里面的 <code>.qcow2</code> 文件（类似 <code>arch_aarch64.qcow2</code>）。</li>
+<li>把这个文件复制到你喜欢的目录，后面我们会用到。</li>
+</ul>
+<hr>
+
+<h3 id="2-安装-qemu-虚拟机工具">
+  2. 安装 QEMU 虚拟机工具
+  
+  <a hidden class="anchor" href="#2-%e5%ae%89%e8%a3%85-qemu-%e8%99%9a%e6%8b%9f%e6%9c%ba%e5%b7%a5%e5%85%b7">
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M172.5 131.1C228.1 75.51 320.5 75.51 376.1 131.1C426.1 181.1 433.5 260.8 392.4 318.3L391.3 319.9C381 334.2 361 337.6 346.7 327.3C332.3 317 328.9 297 339.2 282.7L340.3 281.1C363.2 249 359.6 205.1 331.7 177.2C300.3 145.8 249.2 145.8 217.7 177.2L105.5 289.5C73.99 320.1 73.99 372 105.5 403.5C133.3 431.4 177.3 435 209.3 412.1L210.9 410.1C225.3 400.7 245.3 404 255.5 418.4C265.8 432.8 262.5 452.8 248.1 463.1L246.5 464.2C188.1 505.3 110.2 498.7 60.21 448.8C3.741 392.3 3.741 300.7 60.21 244.3L172.5 131.1zM467.5 380C411 436.5 319.5 436.5 263 380C213 330 206.5 251.2 247.6 193.7L248.7 192.1C258.1 177.8 278.1 174.4 293.3 184.7C307.7 194.1 311.1 214.1 300.8 229.3L299.7 230.9C276.8 262.1 280.4 306.9 308.3 334.8C339.7 366.2 390.8 366.2 422.3 334.8L534.5 222.5C566 191 566 139.1 534.5 108.5C506.7 80.63 462.7 76.99 430.7 99.9L429.1 101C414.7 111.3 394.7 107.1 384.5 93.58C374.2 79.2 377.5 59.21 391.9 48.94L393.5 47.82C451 6.731 529.8 13.25 579.8 63.24C636.3 119.7 636.3 211.3 579.8 267.7L467.5 380z"/></svg>
+
+
+ </a>
+  
+</h3>
+<p>我们使用 QEMU 来运行虚拟机，安装方法也很简单：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>brew install qemu
+</span></span></code></pre></div><hr>
+
+<h3 id="3-用-qemu-启动虚拟机并加载自定义内核">
+  3. 用 QEMU 启动虚拟机并加载自定义内核
+  
+  <a hidden class="anchor" href="#3-%e7%94%a8-qemu-%e5%90%af%e5%8a%a8%e8%99%9a%e6%8b%9f%e6%9c%ba%e5%b9%b6%e5%8a%a0%e8%bd%bd%e8%87%aa%e5%ae%9a%e4%b9%89%e5%86%85%e6%a0%b8">
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M172.5 131.1C228.1 75.51 320.5 75.51 376.1 131.1C426.1 181.1 433.5 260.8 392.4 318.3L391.3 319.9C381 334.2 361 337.6 346.7 327.3C332.3 317 328.9 297 339.2 282.7L340.3 281.1C363.2 249 359.6 205.1 331.7 177.2C300.3 145.8 249.2 145.8 217.7 177.2L105.5 289.5C73.99 320.1 73.99 372 105.5 403.5C133.3 431.4 177.3 435 209.3 412.1L210.9 410.1C225.3 400.7 245.3 404 255.5 418.4C265.8 432.8 262.5 452.8 248.1 463.1L246.5 464.2C188.1 505.3 110.2 498.7 60.21 448.8C3.741 392.3 3.741 300.7 60.21 244.3L172.5 131.1zM467.5 380C411 436.5 319.5 436.5 263 380C213 330 206.5 251.2 247.6 193.7L248.7 192.1C258.1 177.8 278.1 174.4 293.3 184.7C307.7 194.1 311.1 214.1 300.8 229.3L299.7 230.9C276.8 262.1 280.4 306.9 308.3 334.8C339.7 366.2 390.8 366.2 422.3 334.8L534.5 222.5C566 191 566 139.1 534.5 108.5C506.7 80.63 462.7 76.99 430.7 99.9L429.1 101C414.7 111.3 394.7 107.1 384.5 93.58C374.2 79.2 377.5 59.21 391.9 48.94L393.5 47.82C451 6.731 529.8 13.25 579.8 63.24C636.3 119.7 636.3 211.3 579.8 267.7L467.5 380z"/></svg>
+
+
+ </a>
+  
+</h3>
+<p>现在我们手上有两个关键文件：</p>
+<ul>
+<li>自己刚刚编译的 Linux 内核文件（位于 <code>linux/arch/arm64/boot/Image.gz</code>）。</li>
+<li>刚刚提取的 Arch Linux ARM 磁盘镜像文件（比如 <code>arch_aarch64.qcow2</code>）。</li>
+</ul>
+<p>我们用下面的命令启动虚拟机，并加载我们编译好的内核：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>qemu-system-aarch64 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -machine virt <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -cpu max <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -m <span style="color:#ae81ff">2048</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -drive file<span style="color:#f92672">=</span>arch_aarch64.qcow2,format<span style="color:#f92672">=</span>qcow2 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -serial stdio <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -kernel ./linux/arch/arm64/boot/Image.gz <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -append <span style="color:#e6db74">&#34;root=/dev/vda2 rw console=ttyAMA0&#34;</span>
+</span></span></code></pre></div><p>参数解释：</p>
+<ul>
+<li><code>qemu-system-aarch64</code>：表示启动基于 ARM 架构（arm64）的虚拟机。</li>
+<li><code>-machine virt</code>：使用通用 ARM 虚拟机硬件平台。</li>
+<li><code>-cpu max -m 2048</code>：分配最大 CPU 功能，并给虚拟机分配 2GB 内存。</li>
+<li><code>-drive file=...</code>：指定磁盘镜像文件路径。</li>
+<li><code>-serial stdio</code>：将虚拟机的控制台输出到终端，方便调试。</li>
+<li><code>-kernel</code>：指定我们刚编译好的 Linux 内核文件路径。</li>
+<li><code>-append</code>：传递内核启动参数，指定根文件系统位置为 <code>/dev/vda2</code>，并以可读写模式挂载，同时指定控制台设备。</li>
+</ul>
+<p>虚拟机启动后，你应该会看到 Arch Linux 的启动过程，最后进入系统。</p>
+<hr>
+
+<h3 id="4-检查虚拟机内核版本">
+  4. 检查虚拟机内核版本
+  
+  <a hidden class="anchor" href="#4-%e6%a3%80%e6%9f%a5%e8%99%9a%e6%8b%9f%e6%9c%ba%e5%86%85%e6%a0%b8%e7%89%88%e6%9c%ac">
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M172.5 131.1C228.1 75.51 320.5 75.51 376.1 131.1C426.1 181.1 433.5 260.8 392.4 318.3L391.3 319.9C381 334.2 361 337.6 346.7 327.3C332.3 317 328.9 297 339.2 282.7L340.3 281.1C363.2 249 359.6 205.1 331.7 177.2C300.3 145.8 249.2 145.8 217.7 177.2L105.5 289.5C73.99 320.1 73.99 372 105.5 403.5C133.3 431.4 177.3 435 209.3 412.1L210.9 410.1C225.3 400.7 245.3 404 255.5 418.4C265.8 432.8 262.5 452.8 248.1 463.1L246.5 464.2C188.1 505.3 110.2 498.7 60.21 448.8C3.741 392.3 3.741 300.7 60.21 244.3L172.5 131.1zM467.5 380C411 436.5 319.5 436.5 263 380C213 330 206.5 251.2 247.6 193.7L248.7 192.1C258.1 177.8 278.1 174.4 293.3 184.7C307.7 194.1 311.1 214.1 300.8 229.3L299.7 230.9C276.8 262.1 280.4 306.9 308.3 334.8C339.7 366.2 390.8 366.2 422.3 334.8L534.5 222.5C566 191 566 139.1 534.5 108.5C506.7 80.63 462.7 76.99 430.7 99.9L429.1 101C414.7 111.3 394.7 107.1 384.5 93.58C374.2 79.2 377.5 59.21 391.9 48.94L393.5 47.82C451 6.731 529.8 13.25 579.8 63.24C636.3 119.7 636.3 211.3 579.8 267.7L467.5 380z"/></svg>
+
+
+ </a>
+  
+</h3>
+<p>启动成功后，登录虚拟机，然后执行：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>uname -a
+</span></span></code></pre></div><p>或者使用更直观的工具：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>neofetch
+</span></span></code></pre></div><p>如果之前在编译时设置了自定义的内核版本名（比如 <code>-mykernel</code>），你应该能在输出中看到：</p>
+<pre tabindex="0"><code>Linux (your-hostname) 6.5.7-mykernel #1 SMP PREEMPT ...
+</code></pre><p>看到自己的内核版本号，说明你已经成功地在 macOS 上编译并运行了 Linux 内核，恭喜 🎉！</p>
+<hr>
+
+<h2 id="总结">
+  总结
+  
+  <a hidden class="anchor" href="#%e6%80%bb%e7%bb%93">
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M172.5 131.1C228.1 75.51 320.5 75.51 376.1 131.1C426.1 181.1 433.5 260.8 392.4 318.3L391.3 319.9C381 334.2 361 337.6 346.7 327.3C332.3 317 328.9 297 339.2 282.7L340.3 281.1C363.2 249 359.6 205.1 331.7 177.2C300.3 145.8 249.2 145.8 217.7 177.2L105.5 289.5C73.99 320.1 73.99 372 105.5 403.5C133.3 431.4 177.3 435 209.3 412.1L210.9 410.1C225.3 400.7 245.3 404 255.5 418.4C265.8 432.8 262.5 452.8 248.1 463.1L246.5 464.2C188.1 505.3 110.2 498.7 60.21 448.8C3.741 392.3 3.741 300.7 60.21 244.3L172.5 131.1zM467.5 380C411 436.5 319.5 436.5 263 380C213 330 206.5 251.2 247.6 193.7L248.7 192.1C258.1 177.8 278.1 174.4 293.3 184.7C307.7 194.1 311.1 214.1 300.8 229.3L299.7 230.9C276.8 262.1 280.4 306.9 308.3 334.8C339.7 366.2 390.8 366.2 422.3 334.8L534.5 222.5C566 191 566 139.1 534.5 108.5C506.7 80.63 462.7 76.99 430.7 99.9L429.1 101C414.7 111.3 394.7 107.1 384.5 93.58C374.2 79.2 377.5 59.21 391.9 48.94L393.5 47.82C451 6.731 529.8 13.25 579.8 63.24C636.3 119.7 636.3 211.3 579.8 267.7L467.5 380z"/></svg>
+
+
+ </a>
+  
+</h2>
+<p>到这里，我们就完成了 macOS 上编译 Linux 内核，并使用 QEMU 虚拟机运行的全部过程。虽然过程稍微复杂了一些，但踩过一次坑后，以后再做就会顺利很多。</p>
 
 
 

@@ -13,6 +13,12 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>//localhost:1313/os/compile-in-macos/</loc>
+    <lastmod>2025-03-30T21:59:50+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>//localhost:1313/categories/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>

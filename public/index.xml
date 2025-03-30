@@ -6,7 +6,16 @@
     <description>Recent content on 力工一号的饭盆</description>
     <generator>Hugo -- 0.145.0</generator>
     <language>zh-cn</language>
-    <lastBuildDate></lastBuildDate>
+    <lastBuildDate>Sun, 30 Mar 2025 21:59:50 +0800</lastBuildDate>
     <atom:link href="//localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在 Macos 上编译 linux 内核</title>
+      <link>//localhost:1313/os/compile-in-macos/</link>
+      <pubDate>Sun, 30 Mar 2025 21:59:50 +0800</pubDate>
+      <guid>//localhost:1313/os/compile-in-macos/</guid>
+      <description>之前在 macOS 上尝试编译 Linux 内核时，踩了不少坑。网上的教程大多不够详细，这里我参考了一篇文章 并用GPT4.5整理了一下自己需要的部分，供自己和大家参考。
+准备工作 1. 克隆 Linux 内核源码 首先，我们需要特定版本的 Linux 内核源码（这里用的是 v6.5.7）：
+</description>
+    </item>
   </channel>
 </rss>

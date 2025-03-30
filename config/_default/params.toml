@@ -16,11 +16,11 @@ enableCodeCopy = true
 # Show the icon that switches between dark and light themes when clicked.
 showThemeSwitcher = true
 # Default theme to start from. If "auto", it detects the previous preference/system theme.
-defaultTheme = "auto"  # Valid Options: light, dark, auto
+defaultTheme = "auto" # Valid Options: light, dark, auto
 # When enabled, highlight the current menu item in the menu bar.
 highlightCurrentMenu = true
 # The sections to display in the recent articles list. If not provided, the section with the most articles is used.
-mainSections = ["posts"]
+mainSections = ["posts", "os"]
 # Whether to remove Hugo and theme attribution in the footer.
 removeAttribution = false
 # Add the last build date (i.e., the last updated date) to the footer.
@@ -42,7 +42,7 @@ enableSearch = true
 # Whether to show recent items on the homepage.
 showRecent = true
 # Heading label for recent items.
-showRecentLabel = "Featured"
+showRecentLabel = "最近更新"
 # Number of recent items to show.
 showRecentItems = 4
 # Whether to display a "Show more" link at the end of recent section that directs to `showMoreDest`.
@@ -54,7 +54,7 @@ showMoreDest = "/posts"
 # [Optional] Path to the profile image relative to assets/ folder. Minimum size: 200x200px.
 # image = "imgs/profile.svg"
 # Image position.
-where = "right"  # Options: right, left, top
+where = "right" # Options: right, left, top
 
 # Article settings
 [article]
@@ -88,7 +88,7 @@ showBreadcrumbs = false
 # Whether to display pages as a card
 cardView = true
 # Whether to display RSS link
-showRSS = false
+showRSS = true
 
 # Taxonomy settings
 [taxonomy]
