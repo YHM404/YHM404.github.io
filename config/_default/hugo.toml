@@ -8,11 +8,11 @@ languageCode = 'en-us'
 
 # title = "Site Title"
 
-# theme = "kayal" # UNCOMMENT THIS LINE
+theme = "kayal" # UNCOMMENT THIS LINE
 
 # Number of articles per page in the listing.
 [pagination]
-  pagerSize = 5
+pagerSize = 5
 
 # Enable processing of emojis in markdown.
 enableEmoji = true
@@ -31,15 +31,19 @@ buildFuture = true
 # The types of outputs to generate for the homepage.
 # RSS is required to create RSS feeds, and JSON is needed for the search to function.
 [outputs]
-  home = ["HTML", "RSS", "JSON"]
+home = ["HTML", "RSS", "JSON"]
 
 # Sitemap setting
 [sitemap]
-  changefreq = 'daily'
-  filename = 'sitemap.xml'
-  priority = 0.5
+changefreq = 'daily'
+filename = 'sitemap.xml'
+priority = 0.5
 
 # Google Analytics Configuration
 # [services]
 #   [services.googleAnalytics]
 #     ID = 'G-MEASUREMENT_ID'
+
+[caches]
+[caches.images]
+dir = ':cacheDir/images'
