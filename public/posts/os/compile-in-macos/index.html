@@ -400,7 +400,7 @@
   
 </h3>
 <p>我们需要用 Homebrew 安装一些必要工具：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>brew install clang-format llvm make openssl
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>brew install clang-format llvm lld make openssl
 </span></span></code></pre></div><p>如果后面编译时提示缺少其他工具，再根据提示补装就好。</p>
 <hr>
 
@@ -417,7 +417,7 @@
 </h3>
 <p>Linux 内核源码默认是为 Linux 环境准备的，直接在 macOS 上编译会缺少一些头文件（比如 <code>elf.h</code> 和 <code>endian.h</code>），还会有其他兼容性问题。因此我们需要打一个专门为 macOS 准备的补丁：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd linux
-</span></span><span style="display:flex;"><span>curl -O https://github.com/mastermakrela/kernel-dev/raw/main/mac_patch_6-5-7.patch
+</span></span><span style="display:flex;"><span>curl -O https://raw.githubusercontent.com/mastermakrela/kernel-dev/main/mac_patch_6-5-7.patch
 </span></span><span style="display:flex;"><span>patch &lt; mac_patch_6-5-7.patch
 </span></span></code></pre></div><p>补丁打好后，用下面命令确认一下：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git status
@@ -450,16 +450,16 @@
 </h3>
 <p>接下来就可以编译内核了。我们需要明确告诉编译工具使用 Homebrew 安装的 LLVM 工具链（而不是 macOS 自带的），然后生成默认配置：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>brew --prefix llvm<span style="color:#66d9ef">)</span><span style="color:#e6db74">/bin/:</span>$PATH<span style="color:#e6db74">&#34;</span>
-</span></span><span style="display:flex;"><span>make LLVM<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> defconfig
+</span></span><span style="display:flex;"><span>gmake LLVM<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> defconfig
 </span></span></code></pre></div><p>如果你希望给编译的内核加一个自定义版本后缀（方便以后识别），可以运行：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>make LLVM<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> menuconfig
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gmake LLVM<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> menuconfig
 </span></span></code></pre></div><p>在菜单里选择：</p>
 <ul>
 <li>General setup → Local version - append to kernel release<br>
 输入你希望的版本后缀，比如 <code>-mykernel</code>。</li>
 </ul>
 <p>然后正式开始编译：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>time make LLVM<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> ARCH<span style="color:#f92672">=</span>arm64 -j <span style="color:#66d9ef">$(</span>sysctl -n hw.logicalcpu<span style="color:#66d9ef">)</span> HOSTCFLAGS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-I./&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>time gmake LLVM<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> ARCH<span style="color:#f92672">=</span>arm64 -j <span style="color:#66d9ef">$(</span>sysctl -n hw.logicalcpu<span style="color:#66d9ef">)</span> HOSTCFLAGS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-I./&#34;</span>
 </span></span></code></pre></div><p>参数含义：</p>
 <ul>
 <li><code>LLVM=1</code>：使用 LLVM 工具链（clang）而非传统的 gcc。</li>

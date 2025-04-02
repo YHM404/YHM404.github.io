@@ -30,7 +30,7 @@ git clone git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --depth
 我们需要用 Homebrew 安装一些必要工具：
 
 ```bash
-brew install clang-format llvm make openssl
+brew install clang-format llvm lld make openssl
 ```
 
 如果后面编译时提示缺少其他工具，再根据提示补装就好。
@@ -43,7 +43,7 @@ Linux 内核源码默认是为 Linux 环境准备的，直接在 macOS 上编译
 
 ```bash
 cd linux
-curl -O https://github.com/mastermakrela/kernel-dev/raw/main/mac_patch_6-5-7.patch
+curl -O https://raw.githubusercontent.com/mastermakrela/kernel-dev/main/mac_patch_6-5-7.patch
 patch < mac_patch_6-5-7.patch
 ```
 
@@ -79,13 +79,13 @@ Changes to be committed:
 
 ```bash
 export PATH="$(brew --prefix llvm)/bin/:$PATH"
-make LLVM=1 defconfig
+gmake LLVM=1 defconfig
 ```
 
 如果你希望给编译的内核加一个自定义版本后缀（方便以后识别），可以运行：
 
 ```bash
-make LLVM=1 menuconfig
+gmake LLVM=1 menuconfig
 ```
 
 在菜单里选择：
@@ -96,7 +96,7 @@ make LLVM=1 menuconfig
 然后正式开始编译：
 
 ```bash
-time make LLVM=1 ARCH=arm64 -j $(sysctl -n hw.logicalcpu) HOSTCFLAGS="-I./"
+time gmake LLVM=1 ARCH=arm64 -j $(sysctl -n hw.logicalcpu) HOSTCFLAGS="-I./"
 ```
 
 参数含义：
